@@ -20,10 +20,10 @@ function App() {
   }
 
   // Show login screen if not authenticated
-  if (!user) return <Login />;
+  if (!user) return <div className="page-transition"><Login /></div>;
 
   // Authenticated — show main app
-  return <DietPlanBrain />;
+  return <div className="page-transition"><DietPlanBrain /></div>;
 }
 
 export default App

@@ -129,7 +129,7 @@ export default function Login() {
             </div>
           )}
 
-          <button type="submit" disabled={loading} style={{
+          <button type="submit" disabled={loading} className="premium-btn" style={{
             width: "100%", padding: "15px",
             background: loading ? "#444" : `linear-gradient(135deg, ${BRAND_DARK}, ${BRAND})`,
             border: "none", borderRadius: 14, color: "#fff",

@@ -58,7 +58,38 @@ export default function Navbar({ page, setPage, plan, purchaseDuration }) {
           );
         })}
 
-        <div style={{ width: 1, height: 24, background: "rgba(0,0,0,0.08)", margin: "0 8px" }} />
+        <div style={{ position: "sticky", top: 16, zIndex: 1000, margin: "0 16px" }}>
+      <div className="glass-card" style={{ 
+        padding: "12px 24px", color: "#fff", 
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        borderRadius: 20, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.3)"
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="premium-btn" onClick={() => setPage("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
+            <img src={LOGO_URI} alt="S2" style={{ width: 36, height: 36, borderRadius: 10, background: "#fff", padding: 2 }} />
+            <span style={{ fontWeight: 900, letterSpacing: 1, fontSize: 18 }}>STEP2</span>
+          </div>
+          {plan?.client && (
+            <div style={{ padding: "4px 12px", background: "rgba(255,255,255,0.05)", borderRadius: 12, fontSize: 13, fontWeight: 700, border: "1px solid rgba(255,255,255,0.05)" }}>
+              <span style={{ color: "#666" }}>Client:</span> {plan.client.name}
+            </div>
+          )}
+        </div>
+
+        <div style={{ display: "flex", gap: 4 }}>
+          {[["home", "🏠 Home"], ["dashboard", "👥 Members"], ["form", "💪 New Plan"]].map(([id, label]) => (
+            <button key={id} onClick={() => setPage(id)} className="premium-btn" style={{ 
+              padding: "10px 16px", border: "none", background: page === id ? BRAND : "transparent",
+              color: "#fff", borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: "pointer",
+            }}>{label}</button>
+          ))}
+          <button onClick={() => signOut()} className="premium-btn" style={{ 
+            padding: "10px 16px", border: "none", background: "rgba(255,255,255,0.05)",
+            color: "#ff8a80", borderRadius: 12, fontWeight: 800, fontSize: 13, cursor: "pointer", marginLeft: 8
+          }}>🚪 Exit</button>
+        </div>
+      </div>
+    </div>
 
         {/* Dynamic Context Button */}
         {page === "plan" && plan && (

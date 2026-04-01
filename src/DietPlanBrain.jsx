@@ -158,19 +158,23 @@ export default function DietPlanBrain() {
         </div>
       )}
 
-      <div key={page} className="page-transition" style={{ paddingTop: 80 }}>
-        {page === "home" && <Home setPage={setPage} setFormValue={setFormValue} />}
-        {page === "members" && <MembersDashboard setPage={setPage} setForm={setForm} setPlan={setPlan} setBulkMemberIds={setBulkMemberIds} />}
-        {page === "store" && <Store setPage={setPage} setSelectedPrice={setSelectedPrice} />}
-        {page === "franchise" && <Franchise setPage={setPage} />}
-        {page === "form" && <PlanForm form={form} setFormValue={setFormValue} generate={generate} BRAND_DARK={BRAND_DARK} />}
+      {/* RENDER PAGES */}
+      <div className="page-transition" style={{ padding: "24px 0", maxWidth: 1440, margin: "0 auto" }}>
+        {page === "home" && <Home setPage={setPage} setFormValue={(k, v) => setForm({ ...form, [k]: v })} />}
+        {page === "dashboard" && <MembersDashboard setPage={setPage} setForm={setForm} setPlan={setPlan} setPurchaseDuration={setPurchaseDuration} setUnlocked={setUnlocked} />}
+        {page === "form" && <PlanForm form={form} setForm={setForm} buildPlan={buildPlan} isBulk={isBulk} setIsBulk={setIsBulk} />}
         {page === "checkout" && <Checkout form={form} coupon={coupon} setCoupon={setCoupon} unlockPlan={unlockPlan} startPayment={startPayment} />}
         {page === "payment" && <Payment isProcessing={isProcessing} selectedPrice={selectedPrice} purchaseDuration={purchaseDuration} paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} processPayment={processPayment} />}
         {page === "plan" && plan && (
           <PlanView 
-            plan={plan} tab={tab} setTab={setTab}
-            purchaseDuration={purchaseDuration} setPage={setPage}
-            setForm={setForm} copied={copied} setCopied={setCopied}
+            plan={plan} 
+            tab={tab} 
+            setTab={setTab} 
+            purchaseDuration={purchaseDuration} 
+            setPage={setPage}
+            setForm={setForm}
+            copied={copied}
+            setCopied={setCopied}
           />
         )}
       </div>
