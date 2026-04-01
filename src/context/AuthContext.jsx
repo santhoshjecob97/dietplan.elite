@@ -43,13 +43,23 @@ export function AuthProvider({ children }) {
     return { data, error };
   };
 
+  const signInWithPhone = async (phone) => {
+    const { data, error } = await supabase.auth.signInWithOtp({ phone });
+    return { data, error };
+  };
+
+  const verifyOTP = async (phone, token) => {
+    const { data, error } = await supabase.auth.verifyOtp({ phone, token, type: 'sms' });
+    return { data, error };
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, signInWithPhone, verifyOTP }}>
       {children}
     </AuthContext.Provider>
   );

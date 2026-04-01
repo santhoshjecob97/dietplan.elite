@@ -563,9 +563,22 @@ export default function PlanView({ plan, tab, setTab, purchaseDuration, setPage,
 
         {/* ── ACTION BUTTONS ── */}
         <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap" }}>
-          <button onClick={() => exportPDF(plan.client, plan.metrics, sessionMeals, plan.shop, plan.gc, purchaseDuration)} style={{ flex: 1, minWidth: 150, padding: "14px", borderRadius: 12, border: "none", background: `linear-gradient(135deg,${BRAND_DARK},${C})`, color: "#fff", fontWeight: 800, fontSize: 14, cursor: "pointer", boxShadow: `0 4px 16px ${C}40` }}>⬇ Export PDF</button>
-          <button onClick={() => { setForm({ ...client, age: String(client.age), height: String(client.height), weight: String(client.weight) }); setPage("form") }} style={{ flex: 1, minWidth: 150, padding: "14px", borderRadius: 12, border: `2px solid ${C}`, background: "#fff", color: C, fontWeight: 800, fontSize: 14, cursor: "pointer" }}>✏️ Edit Plan</button>
-          <button onClick={() => setPage("home")} style={{ flex: 1, minWidth: 150, padding: "14px", borderRadius: 12, border: "2px solid #ddd", background: "#fff", color: "#666", fontWeight: 800, fontSize: 14, cursor: "pointer" }}>➕ New Client</button>
+          <button onClick={() => exportPDF(plan.client, plan.metrics, sessionMeals, plan.shop, plan.gc, purchaseDuration)} style={{ flex: 1.5, minWidth: 150, padding: "16px", borderRadius: 14, border: "none", background: `linear-gradient(135deg,${BRAND_DARK},${C})`, color: "#fff", fontWeight: 900, fontSize: 15, cursor: "pointer", boxShadow: `0 8px 24px ${C}40`, display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+            <span>📄</span> Download Elite PDF
+          </button>
+          
+          {client.phone && (
+            <a 
+              href={`https://wa.me/91${client.phone.replace(/\D/g,"")}?text=${encodeURIComponent(getWhatsAppMessage(client, metrics, sessionMeals))}`} 
+              target="_blank" rel="noopener noreferrer"
+              style={{ flex: 1, minWidth: 150, padding: "16px", borderRadius: 14, border: "none", background: "#25D366", color: "#fff", fontWeight: 900, fontSize: 15, cursor: "pointer", boxShadow: "0 8px 24px rgba(37,211,102,0.3)", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, textDecoration: "none" }}
+            >
+              <span>💬</span> WhatsApp Client
+            </a>
+          )}
+
+          <button onClick={() => { setForm({ ...client, age: String(client.age), height: String(client.height), weight: String(client.weight) }); setPage("form") }} style={{ flex: 1, minWidth: 120, padding: "16px", borderRadius: 14, border: `2px solid ${C}`, background: "#fff", color: C, fontWeight: 800, fontSize: 14, cursor: "pointer" }}>✏️ Edit</button>
+          <button onClick={() => setPage("home")} style={{ flex: 1, minWidth: 120, padding: "16px", borderRadius: 14, border: "2px solid #ddd", background: "#fff", color: "#666", fontWeight: 800, fontSize: 14, cursor: "pointer" }}>🏠 Home</button>
         </div>
       </div>
     </div>
