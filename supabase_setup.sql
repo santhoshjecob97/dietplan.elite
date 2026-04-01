@@ -96,6 +96,5 @@ CREATE TABLE IF NOT EXISTS food_logs (
 ALTER TABLE food_logs ENABLE ROW LEVEL SECURITY;
 
 -- Trainer sees their members logs
-CREATE POLICY " trainer_food_logs\ ON food_logs 
+CREATE POLICY "trainer_food_logs" ON food_logs 
  FOR ALL USING (trainer_id = auth.uid());
-
